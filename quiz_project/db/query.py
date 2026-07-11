@@ -1,6 +1,6 @@
 from db.connection import get_connection
 
-def get_qiestions_by_quiz(quiz_id):
+def get_questions_by_quiz(quiz_id):
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -67,3 +67,13 @@ def get_next_question(last_id=0, quiz_id=1, q_type=None):
     result = cursor.fetchone()
     conn.close
     return result
+
+def get_all_quizzes():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT id, name FROM quiz")
+    results = cursor.fetchall()
+
+    conn.close()
+    return results

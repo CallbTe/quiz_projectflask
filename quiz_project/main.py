@@ -2,28 +2,30 @@ from db.connection import get_connection
 from db.schema import create_tables
 from scripts.seed import seed_questions, seed_quiz, seed_quiz_content
 from db.query import get_questions_by_quiz_and_type, get_next_question
+from web.app import create_app
 
-def main():
-    current_id = 0
-    soal_ke = 0
+app = create_app()
+# def main():
+#     current_id = 0
+#     soal_ke = 0
 
-    while True:
-        q = get_next_question(last_id=current_id, quiz_id=1)
+#     while True:
+#         q = get_next_question(last_id=current_id, quiz_id=1)
         
-        if not q:
-            print("\n=== Quiz Seleasi ===")
-            break
+#         if not q:
+#             print("\n=== Quiz Seleasi ===")
+#             break
 
-        soal_ke += 1
-        current_id = q["id"]
+#         soal_ke += 1
+#         current_id = q["id"]
 
-        print(f"\nsSoal {soal_ke}: {q['question']} [{q['type']}]")
-        print(f"    A.{q['answer']}")
-        print(f"    B.{q['wrong1']}")
-        print(f"    C.{q['wrong2']}")
-        print(f"    D.{q['wrong3']}")
+#         print(f"\nsSoal {soal_ke}: {q['question']} [{q['type']}]")
+#         print(f"    A.{q['answer']}")
+#         print(f"    B.{q['wrong1']}")
+#         print(f"    C.{q['wrong2']}")
+#         print(f"    D.{q['wrong3']}")
 
-        input(" Tekan Enter untuk lanjut...")
+#         input(" Tekan Enter untuk lanjut...")
     # questions = get_questions_by_quiz_and_type(1)
     # print(f"Semua soal Math Quiz: {len(questions)} soal")
     # for q in questions:
@@ -46,4 +48,5 @@ def main():
     # conn.close()
 
 if __name__ == "__main__":
-    main()
+    app.run(debug=True)
+    # main()
